@@ -3,6 +3,9 @@ if [[ -z $NVIM_LISTEN_ADDRESS ]]; then
     exec nvim +term
 fi
 
+# unlimited core dump size.
+ulimit -c unlimited
+
 # BEGIN ANTIGEN PLUGIN MANAGEMENT <3
     mkdir -p $HOME/.antigen/repos
     export ZDOTDIR=$HOME/.antigen/repos
@@ -264,10 +267,6 @@ fi
             # global node module location
             export NODE_PATH=$NODE_PATH:/usr/lib/node_modules:/usr/local/lib/node_modules
 
-            # TODO: if Mac OS X
-            #export NVM_DIR=~/.nvm
-            #source $(brew --prefix nvm)/nvm.sh
-
         ## Default editor
         export EDITOR=nvim
         export VISUAL=nvim
@@ -358,3 +357,5 @@ fi
     trap 'echo "Goodbye!"' EXIT
 
 ## END CUSTOM ported from bashrc
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

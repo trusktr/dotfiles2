@@ -8,37 +8,38 @@ ulimit -c unlimited
 
 # BEGIN ANTIGEN PLUGIN MANAGEMENT <3
     mkdir -p $HOME/.antigen/repos
+    ln -s ~/.zshrc $HOME/.antigen/repos/.zshrc 2>/dev/null
     export ZDOTDIR=$HOME/.antigen/repos
     source ~/src/zsh-users+antigen/antigen.zsh
 
     # OH-MY-ZSH SETTINGS (Define these before loading oh-my-zsh or it won't work)
         COMPLETION_WAITING_DOTS="true"
 
-    ## OH-MY-ZSH BUNDLES
-        #antigen use oh-my-zsh # load oh-my-zsh
-        ##antigen bundle svn
-        #antigen bundle git
-        #antigen bundle git-extras
-        #antigen bundle github
-        ##antigen bundle coffee # Coffee.js completion
+    # OH-MY-ZSH BUNDLES
+        antigen use oh-my-zsh # load oh-my-zsh
+        #antigen bundle svn
+        antigen bundle git
+        antigen bundle git-extras
+        antigen bundle github
+        #antigen bundle coffee # Coffee.js completion
         #antigen bundle colored-man # colored man pages
-        #antigen bundle command-not-found # Guess what to install when running an unknown command
-        #antigen bundle extract # Helper for extracting different types of archives
+        antigen bundle command-not-found # Guess what to install when running an unknown command
+        antigen bundle extract # Helper for extracting different types of archives
         #antigen bundle common-aliases # a starting point for aliases. Know what these are then override as necessary.
 
     # PREZTO BUNDLES
         antigen use prezto
         # ^ XXX XXX XXX: This changes the $ZDOTDIR to ~/.antigen/repos/
 
-        ## Source Prezto. (This is already done by antigen I think)
+        # Source Prezto. (This is already done by antigen I think)
         #if [[ -s "${ZDOTDIR:-$HOME}/.antigen/repos/.zprezto/init.zsh" ]]; then
           #source "${ZDOTDIR:-$HOME}/.antigen/repos/.zprezto/init.zsh"
         #fi
 
-    ## OTHER BUNDLES
-        #antigen bundle zsh-users/zsh-syntax-highlighting
-        #antigen bundle zsh-users/zsh-completions
-        #antigen bundle zsh-users/zsh-history-substring-search
+    # OTHER BUNDLES
+        antigen bundle zsh-users/zsh-syntax-highlighting
+        antigen bundle zsh-users/zsh-completions
+        antigen bundle zsh-users/zsh-history-substring-search
         #antigen bundle sharat87/autoenv # directory-specific scripts by placing a .env file in a directory.
         #antigen bundle kennethreitz/autoenv # directory-specific scripts by placing a .env file in a directory.
         #antigen bundle sharat87/zsh-vim-mode # vim-like bindings TODO: make ctrl-c exit INSERT and not cancel the command.
@@ -52,35 +53,35 @@ ulimit -c unlimited
         antigen bundle trusktr/longterm-beep
 
 
-    ## THEMES
-        ##antigen bundle Valodim/zsh-prompt-powerline
-            ##fpath+=( $HOME/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-Valodim-SLASH-zsh-prompt-powerline.git/ )
-            ##autoload promptinit ; promptinit
-            ##prompt powerline
-        ##antigen theme XsErG/zsh-themes themes/lazyuser
-        ##antigen theme KuoE0/oh-my-zsh-solarized-powerline-theme # DOESN"T WORK
-            ##. $HOME/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-KuoE0-SLASH-oh-my-zsh-solarized-powerline-theme.git
-        ##antigen theme jeremyFreeAgent/oh-my-zsh-powerline-theme
-            ##POWERLINE_FULL_CURRENT_PATH="true"
-            ###POWERLINE_RIGHT_B="date"
-            ##POWERLINE_RIGHT_A="mixed"
-            ###POWERLINE_SHOW_GIT_ON_RIGHT="true"
-            ##POWERLINE_DETECT_SSH="true"
-            ##. /home/trusktr/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-jeremyFreeAgent-SLASH-oh-my-zsh-powerline-theme.git/powerline.zsh-theme
+    # THEMES
+        #antigen bundle Valodim/zsh-prompt-powerline
+            #fpath+=( $HOME/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-Valodim-SLASH-zsh-prompt-powerline.git/ )
+            #autoload promptinit ; promptinit
+            #prompt powerline
+        #antigen theme XsErG/zsh-themes themes/lazyuser
+        #antigen theme KuoE0/oh-my-zsh-solarized-powerline-theme # DOESN"T WORK
+            #. $HOME/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-KuoE0-SLASH-oh-my-zsh-solarized-powerline-theme.git
+        #antigen theme jeremyFreeAgent/oh-my-zsh-powerline-theme
+            #POWERLINE_FULL_CURRENT_PATH="true"
+            ##POWERLINE_RIGHT_B="date"
+            #POWERLINE_RIGHT_A="mixed"
+            ##POWERLINE_SHOW_GIT_ON_RIGHT="true"
+            #POWERLINE_DETECT_SSH="true"
+            #. /home/trusktr/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-jeremyFreeAgent-SLASH-oh-my-zsh-powerline-theme.git/powerline.zsh-theme
         #antigen theme agnoster
-        ##antigen theme fox
-        ##antigen theme rummik/zsh-theme
-        ##antigen theme sorin
-        ##antigen theme desyncr/zshrc themes/af-magic-mod
-        ##antigen bundle Lokaltog/powerline powerline/bindings/zsh
-        ##add-zsh-hook precmd dynamicPS1 # my theme. See dynamicPS1 below
+        #antigen theme fox
+        #antigen theme rummik/zsh-theme
+        antigen theme sorin
+        #antigen theme desyncr/zshrc themes/af-magic-mod
+        #antigen bundle Lokaltog/powerline powerline/bindings/zsh
+        #add-zsh-hook precmd dynamicPS1 # my theme. See dynamicPS1 below
 
-            ## Add a new line before the prompt when the theme doesn't already to it.
-                #add-zsh-hook precmd prompNewLine; function prompNewLine { echo }
+            # Add a new line before the prompt when the theme doesn't already to it.
+                add-zsh-hook precmd prompNewLine; function prompNewLine { echo }
 
     # FINALIZE ANTIGEN STUFF
         antigen apply
-# BEGIN ANTIGEN PLUGIN MANAGEMENT <3
+# END ANTIGEN PLUGIN MANAGEMENT <3
 
 # The following lines were added by compinstall
     #zstyle ':completion:*' auto-description 'Specify %d.'
@@ -273,7 +274,8 @@ ulimit -c unlimited
         export PAGER=less
 
         ## ls color. Color rules can be stored in a file and loaded with dircolors. NOTE: This needs to be changed on different systems.
-        export `dircolors | sed 's/^.//' | sed 's/..$//'` # sets up the LS_COLORS environment variable for ls with default colors.
+        #export `dircolors | sed 's/^.//' | sed 's/..$//'` # sets up the LS_COLORS environment variable for ls with default colors.
+        ## ^ not available on Mac OS X
 
     ## END ENVIRONMENT VARS
 
@@ -302,14 +304,21 @@ ulimit -c unlimited
         bindkey "^[[B" down-line-or-beginning-search # Down
 
     ## BEGIN aliases and alias functions
-        alias rm='rm -I' # -I: prompt before removing
+        #TODO OS X vs Linux
+        #alias rm='rm -I' # -I: prompt before removing
+        alias rm='grm -I' # -I: prompt before removing
+
         alias mv='mv -i' # -i: prompt before overwrite
         alias ~='cd ~'
         alias .="pwd"
         alias ..="cd .."
         alias ...="cd ../.."
         alias ....="cd ../../.."
-        alias ls="ls -F --group-directories-first --color=auto" # this doesn't work for some reason. EDIT: This didn't work because I was overwriting it in ~truktr/.bashrc
+
+        #TODO OS X vs Linux
+        #alias ls="ls -F --group-directories-first --color=auto" # this doesn't work for some reason. EDIT: This didn't work because I was overwriting it in ~truktr/.bashrc
+        alias ls="gls -F --group-directories-first --color=auto" # OS X
+
         alias l=ls
         alias ll="ls -l"
         alias la="ls -A"
@@ -318,7 +327,7 @@ ulimit -c unlimited
         alias h='history'
         #TODO for zsh: alias href='echo -n "Refreshing history... "; hcln; history -c; history -r; echo "done."' #refresh the history. See hcln below.
         #alias git='git add .; git'
-        alias clear="clear; archey"
+        #alias clear="clear; archey"
         alias mce="mc -e" # mcedit
         alias sudo="sudo " #makes sudo recognize aliases.
         alias untar="tar -xzvf"
@@ -351,7 +360,7 @@ ulimit -c unlimited
     ## END aliases and alias functions
 
     # clear (shows Arch Linux logo with Archey)
-    clear
+    #clear
 
     ## execute a command when the shell exits
     trap 'echo "Goodbye!"' EXIT

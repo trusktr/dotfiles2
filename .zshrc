@@ -1,7 +1,8 @@
-# start an nvim terminal if we're not in nvim.
-if [[ -z $NVIM_LISTEN_ADDRESS ]]; then
-    exec nvim +term
-fi
+## start an nvim terminal if we're not in nvim.
+#if [[ -z $NVIM_LISTEN_ADDRESS ]]; then
+    ##export NVIM_TUI_ENABLE_TRUE_COLOR=1
+    #exec nvim +term
+#fi
 
 # unlimited core dump size.
 ulimit -c unlimited
@@ -352,7 +353,8 @@ ulimit -c unlimited
         nvim() {
             if [[ -z $NVIM_LISTEN_ADDRESS ]]; then
                 # not running inside nvim
-                /usr/bin/nvim "$@"
+                #/usr/bin/nvim "$@" # Most linuxes
+                /usr/local/bin/nvim "$@" # Mac OS via Homebrew
             else
                 python -c "from neovim import attach; import os; file = '$1'; file = file if file.startswith('/') else '$(pwd)/'+file; nvim = attach('socket', path='$NVIM_LISTEN_ADDRESS'); nvim.command(\"tabnew \"+file);"
             fi

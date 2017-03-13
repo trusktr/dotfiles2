@@ -373,3 +373,12 @@ ulimit -c unlimited
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH=~/.local/bin:$PATH
+
+export PATH=~/imvu/website-project/node-binaries/bin:$PATH
+
+export GOPATH=~/.go
+export PATH=$PATH:~/.go/bin
+
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"

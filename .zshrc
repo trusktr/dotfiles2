@@ -371,3 +371,5 @@ ulimit -c unlimited
 ## END CUSTOM ported from bashrc
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH=~/.local/bin:$PATH

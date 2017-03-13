@@ -306,8 +306,8 @@ ulimit -c unlimited
 
     ## BEGIN aliases and alias functions
         #TODO OS X vs Linux
-        #alias rm='rm -I' # -I: prompt before removing
-        alias rm='grm -I' # -I: prompt before removing
+        alias rm='rm -I' # Linux
+        #alias rm='grm -I' # macOS
 
         alias mv='mv -i' # -i: prompt before overwrite
         alias ~='cd ~'
@@ -317,8 +317,8 @@ ulimit -c unlimited
         alias ....="cd ../../.."
 
         #TODO OS X vs Linux
-        #alias ls="ls -F --group-directories-first --color=auto" # this doesn't work for some reason. EDIT: This didn't work because I was overwriting it in ~truktr/.bashrc
-        alias ls="gls -F --group-directories-first --color=auto" # OS X
+        alias ls="ls -F --group-directories-first --color=auto" # Linux
+        #alias ls="gls -F --group-directories-first --color=auto" # macOS
 
         alias l=ls
         alias ll="ls -l"
@@ -353,8 +353,9 @@ ulimit -c unlimited
         nvim() {
             if [[ -z $NVIM_LISTEN_ADDRESS ]]; then
                 # not running inside nvim
-                #/usr/bin/nvim "$@" # Most linuxes
-                /usr/local/bin/nvim "$@" # Mac OS via Homebrew
+                #TODO OS X vs Linux
+                /usr/bin/nvim "$@" # Most linuxes
+                #/usr/local/bin/nvim "$@" # macOS via Homebrew
             else
                 python -c "from neovim import attach; import os; file = '$1'; file = file if file.startswith('/') else '$(pwd)/'+file; nvim = attach('socket', path='$NVIM_LISTEN_ADDRESS'); nvim.command(\"tabnew \"+file);"
             fi

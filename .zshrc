@@ -355,7 +355,8 @@ ulimit -c unlimited
                 # not running inside nvim
                 #TODO OS X vs Linux
                 /usr/bin/nvim "$@" # Most linuxes
-                #/usr/local/bin/nvim "$@" # macOS via Homebrew
+                #/usr/local/bin/nvim "$@" # macOS Homebrew
+                #~/.linuxbrew/bin/nvim "$@" # Linuxbrew
             else
                 python -c "from neovim import attach; import os; file = '$1'; file = file if file.startswith('/') else '$(pwd)/'+file; nvim = attach('socket', path='$NVIM_LISTEN_ADDRESS'); nvim.command(\"tabnew \"+file);"
             fi

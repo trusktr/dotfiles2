@@ -370,3 +370,8 @@ ulimit -c unlimited
 ## END CUSTOM ported from bashrc
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# swap keys in X
+#if hash xmodmap 2>/dev/null; then
+    #xmodmap ~/.Xmodmap
+#fi

@@ -306,8 +306,8 @@ ulimit -c unlimited
 
     ## BEGIN aliases and alias functions
         #TODO OS X vs Linux
-        #alias rm='rm -I' # -I: prompt before removing
-        alias rm='grm -I' # -I: prompt before removing
+        alias rm='rm -I' # -I: prompt before removing
+        #alias rm='grm -I' # -I: prompt before removing
 
         alias mv='mv -i' # -i: prompt before overwrite
         alias ~='cd ~'
@@ -317,8 +317,8 @@ ulimit -c unlimited
         alias ....="cd ../../.."
 
         #TODO OS X vs Linux
-        #alias ls="ls -F --group-directories-first --color=auto" # this doesn't work for some reason. EDIT: This didn't work because I was overwriting it in ~truktr/.bashrc
-        alias ls="gls -F --group-directories-first --color=auto" # OS X
+        alias ls="ls -F --group-directories-first --color=auto" # this doesn't work for some reason. EDIT: This didn't work because I was overwriting it in ~truktr/.bashrc
+        #alias ls="gls -F --group-directories-first --color=auto" # OS X
 
         alias l=ls
         alias ll="ls -l"
@@ -353,8 +353,8 @@ ulimit -c unlimited
         nvim() {
             if [[ -z $NVIM_LISTEN_ADDRESS ]]; then
                 # not running inside nvim
-                #/usr/bin/nvim "$@" # Most linuxes
-                /usr/local/bin/nvim "$@" # Mac OS via Homebrew
+                /usr/bin/nvim "$@" # Most linuxes
+                #/usr/local/bin/nvim "$@" # Mac OS via Homebrew
             else
                 python -c "from neovim import attach; import os; file = '$1'; file = file if file.startswith('/') else '$(pwd)/'+file; nvim = attach('socket', path='$NVIM_LISTEN_ADDRESS'); nvim.command(\"tabnew \"+file);"
             fi
@@ -375,3 +375,30 @@ ulimit -c unlimited
 #if hash xmodmap 2>/dev/null; then
     #xmodmap ~/.Xmodmap
 #fi
+
+### Chrome OS
+
+    ## Make localhost:3000 available on the local network, if needed.
+    #sudo /sbin/iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
+
+    ### mount remounting partitions if wanting write access to them
+
+        ##If the home folder is mounted with noexec, remount with exec.
+        #mount | grep home/chronos/user | cut -d\( -f2 | grep noexec > /dev/null
+        #if [ $? -eq 0 ]; then
+            #sudo mount -i -o remount,exec /home/chronos/user
+            #echo " --" Mounted ChromeOS home folder with exec.
+        #else
+            #echo " --" ChromeOS home folder already remounted with exec.
+        #fi
+
+        ## If the root folder is mounted read-only, remount read-write.
+        ## This requires root filesystem verification to be turned off,
+        ## that should be enough info to google...
+        #mount | grep " / " | cut -d\( -f2 | grep "\bro\b" > /dev/null
+        #if [ $? -eq 0 ]; then
+            #sudo mount -i -o remount,rw /
+            #echo " --" Mounted ChromeOS root folder read-write.
+        #else
+            #echo " --" ChromeOS root folder already remounted with read-write.
+        #fi

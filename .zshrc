@@ -402,3 +402,10 @@ ulimit -c unlimited
         #else
             #echo " --" ChromeOS root folder already remounted with read-write.
         #fi
+
+### Google Cloud SDK (ZSH)
+    #source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+    #source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+
+### Go
+    #export GOPATH=~/go

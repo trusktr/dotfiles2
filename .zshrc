@@ -260,6 +260,9 @@ ulimit -c unlimited
             # TODO: if Mac OS X
             #export PATH=$PATH:~/Library/Android/sdk/platform-tools
 
+        # Homebrew
+            export PATH=$PATH:/usr/local/bin
+
         # proper encoding for the linux terminal (ttys)
         if [ "$TERM" = linux ] ; then
                 export T3WINDOW_OPTS=acs=utf8
@@ -350,11 +353,11 @@ ulimit -c unlimited
         # Open files in a new tab of the parent nvim instance (instead of a new
         # nvim instance) when `nvim` is executed at the command line in a
         # terminal buffer.
+        NVIM=`which nvim`
         nvim() {
             if [[ -z $NVIM_LISTEN_ADDRESS ]]; then
                 # not running inside nvim
-                /usr/bin/nvim "$@" # Most linuxes
-                #/usr/local/bin/nvim "$@" # Mac OS via Homebrew
+                $NVIM "$@" # Most linuxes
             else
                 python -c "from neovim import attach; import os; file = '$1'; file = file if file.startswith('/') else '$(pwd)/'+file; nvim = attach('socket', path='$NVIM_LISTEN_ADDRESS'); nvim.command(\"tabnew \"+file);"
             fi

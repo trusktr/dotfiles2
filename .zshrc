@@ -350,6 +350,9 @@ ulimit -c unlimited
         alias haste="HASTE_SERVER=http://trusktr.io:7777 haste"
         alias ack='ack --smart-case --pager=less --sort-files'
 
+        #alias gl='git log' already have gl for git push.
+        alias gs='git status'
+
         # Open files in a new tab of the parent nvim instance (instead of a new
         # nvim instance) when `nvim` is executed at the command line in a
         # terminal buffer.

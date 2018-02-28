@@ -391,8 +391,8 @@ ulimit -c unlimited
 
 ### Chrome OS Crouton
     which croutonversion 2>/dev/null 1>/dev/null
-    status=$?
-    isChromeOS="false"; if $( exit $status ); then isChromeOS="true"; fi
+    result=$?
+    isChromeOS="false"; if $( exit $result ); then isChromeOS="true"; fi
 
     if $isChromeOS; then
         # TODO add croshclip install to setup script.
@@ -427,7 +427,9 @@ ulimit -c unlimited
             # turns on the croshclip server if it isn't running.
             # vimrc contains the setting for neovim to use croshclip for yank/paste.
             # Requires ~/go/bin to be in PATH first.
-            nc -z localhost 30001 || croshclip -serve > /tmp/croshclip.log 2>&1 &
+            ps aux | grep '[c]roshclip -serve' 1>/dev/null
+            result=$?
+            if ! $( exit $result ); then croshclip -serve > /tmp/croshclip.log 2>&1 &!; fi
 
         ### Disable right click (leave two-finger right click). More info: https://askubuntu.com/questions/602193/how-to-disable-right-click-on-the-touchpad/602439#602439
             synclient RightButtonAreaLeft=0

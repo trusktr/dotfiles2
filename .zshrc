@@ -285,7 +285,7 @@ ulimit -c unlimited
 
     ## GENERAL SHELL OPTIONS
         #TODO: shopt -s checkwinsize # fix line wrap on window resize
-        setopt autocd # change dirs if the command supplied doesn't exist and is a directory name.
+        setopt autocd # change dirs if the command supplied does not exist and is a directory name.
         setopt beep # beep!
         setopt extendedGlob # Treat the ‘#’, ‘~’ and ‘^’ characters as part of patterns for filename generation, etc. (An initial unquoted ‘~’ always produces named directory expansion.)
         setopt noMatch # If a pattern for filename generation has no matches, print an error, instead of leaving it unchanged in the argument list.
@@ -350,6 +350,9 @@ ulimit -c unlimited
         alias haste="HASTE_SERVER=http://trusktr.io:7777 haste"
         alias ack='ack --smart-case --pager=less --sort-files'
 
+        #alias gl='git log' already have gl for git push.
+        alias gs='git status'
+
         # Open files in a new tab of the parent nvim instance (instead of a new
         # nvim instance) when `nvim` is executed at the command line in a
         # terminal buffer.
@@ -372,43 +375,76 @@ ulimit -c unlimited
 
 ## END CUSTOM ported from bashrc
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # swap keys in X
 #if hash xmodmap 2>/dev/null; then
     #xmodmap ~/.Xmodmap
 #fi
-
-### Chrome OS
-
-    ## Make localhost:3000 available on the local network, if needed.
-    #sudo /sbin/iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
-
-    ### mount remounting partitions if wanting write access to them
-
-        ##If the home folder is mounted with noexec, remount with exec.
-        #mount | grep home/chronos/user | cut -d\( -f2 | grep noexec > /dev/null
-        #if [ $? -eq 0 ]; then
-            #sudo mount -i -o remount,exec /home/chronos/user
-            #echo " --" Mounted ChromeOS home folder with exec.
-        #else
-            #echo " --" ChromeOS home folder already remounted with exec.
-        #fi
-
-        ## If the root folder is mounted read-only, remount read-write.
-        ## This requires root filesystem verification to be turned off,
-        ## that should be enough info to google...
-        #mount | grep " / " | cut -d\( -f2 | grep "\bro\b" > /dev/null
-        #if [ $? -eq 0 ]; then
-            #sudo mount -i -o remount,rw /
-            #echo " --" Mounted ChromeOS root folder read-write.
-        #else
-            #echo " --" ChromeOS root folder already remounted with read-write.
-        #fi
 
 ### Google Cloud SDK (ZSH)
     #source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
     #source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 ### Go
-    #export GOPATH=~/go
+    # TODO add Go setup to setup script.
+    export GOPATH=~/go
+    export PATH="$HOME/go/bin:$PATH"
+
+### Chrome OS Crouton
+    which croutonversion 2>/dev/null 1>/dev/null
+    status=$?
+    isChromeOS="false"; if $( exit $status ); then isChromeOS="true"; fi
+
+    if $isChromeOS; then
+        # TODO add croshclip install to setup script.
+        # https://github.com/acornejo/croshclip
+
+        ## Make localhost:3000 available on the local network, if needed.
+        #sudo /sbin/iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
+
+        ### mount remounting partitions if wanting write access to them
+
+            ##If the home folder is mounted with noexec, remount with exec.
+            #mount | grep home/chronos/user | cut -d\( -f2 | grep noexec > /dev/null
+            #if [ $? -eq 0 ]; then
+                #sudo mount -i -o remount,exec /home/chronos/user
+                #echo " --" Mounted ChromeOS home folder with exec.
+            #else
+                #echo " --" ChromeOS home folder already remounted with exec.
+            #fi
+
+            ## If the root folder is mounted read-only, remount read-write.
+            ## This requires root filesystem verification to be turned off,
+            ## that should be enough info to google...
+            #mount | grep " / " | cut -d\( -f2 | grep "\bro\b" > /dev/null
+            #if [ $? -eq 0 ]; then
+                #sudo mount -i -o remount,rw /
+                #echo " --" Mounted ChromeOS root folder read-write.
+            #else
+                #echo " --" ChromeOS root folder already remounted with read-write.
+            #fi
+
+        ### Yank/paste from Crouton enter-chroot
+            # turns on the croshclip server if it isn't running.
+            # vimrc contains the setting for neovim to use croshclip for yank/paste.
+            # Requires ~/go/bin to be in PATH first.
+            nc -z localhost 30001 || croshclip -serve > /tmp/croshclip.log 2>&1 &
+
+        ### Disable right click (leave two-finger right click). More info: https://askubuntu.com/questions/602193/how-to-disable-right-click-on-the-touchpad/602439#602439
+            synclient RightButtonAreaLeft=0
+            synclient RightButtonAreaTop=0
+    fi
+
+
+### linuxbrew
+
+    # uncomment one of the following depending on where it installed (see install
+    # output).
+    export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+    #export PATH="$HOME/.linuxbrew/bin:$PATH"
+
+### Node versions managed with `n`, use this if `n` doesn't seem to switch your versions.
+    #export PATH="/usr/local/n/versions/node/8.1.4/bin:$PATH"
+
+### Auto-generated
+# fzf fuzzy finder
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

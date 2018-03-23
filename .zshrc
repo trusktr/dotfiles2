@@ -308,9 +308,11 @@ ulimit -c unlimited
         bindkey "^[[B" down-line-or-beginning-search # Down
 
     ## BEGIN aliases and alias functions
-        #TODO OS X vs Linux
-        alias rm='rm -I' # -I: prompt before removing
-        #alias rm='grm -I' # -I: prompt before removing
+        if [ $(uname) = Linux ] ; then
+            alias rm='rm -I' # -I: prompt before removing
+        elif [ $(uname) = Darwin ] ; then
+            alias rm='grm -I' # -I: prompt before removing
+        fi
 
         alias mv='mv -i' # -i: prompt before overwrite
         alias ~='cd ~'
@@ -320,8 +322,11 @@ ulimit -c unlimited
         alias ....="cd ../../.."
 
         #TODO OS X vs Linux
-        alias ls="ls -F --group-directories-first --color=auto" # this doesn't work for some reason. EDIT: This didn't work because I was overwriting it in ~truktr/.bashrc
-        #alias ls="gls -F --group-directories-first --color=auto" # OS X
+        if [ $(uname) = Linux ] ; then
+            alias ls="ls -F --group-directories-first --color=auto" # this doesn't work for some reason. EDIT: This didn't work because I was overwriting it in ~truktr/.bashrc
+        elif [ $(uname) = Darwin ] ; then
+            alias ls="gls -F --group-directories-first --color=auto" # OS X
+        fi
 
         alias l=ls
         alias ll="ls -l"

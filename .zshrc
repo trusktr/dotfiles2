@@ -439,6 +439,18 @@ ulimit -c unlimited
         ### Disable right click (leave two-finger right click). More info: https://askubuntu.com/questions/602193/how-to-disable-right-click-on-the-touchpad/602439#602439
             synclient RightButtonAreaLeft=0
             synclient RightButtonAreaTop=0
+
+        ### Increase number of allowed inotify watchers, seems to be lower in ChromeOS by default
+            # f.e. fixes ENOSPC errors with Node.js/Meteor apps watching many files during dev.
+            # See: https://stackoverflow.com/questions/22475849/node-js-error-enospc
+
+            # TODO do this once, if needed. probably move to setup.sh. Different file for Arch Linux
+            #echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+
+            if [[ ! -a /tmp/trusktr-ran-sysctl-p ]]; then
+                sudo sysctl -p
+                touch /tmp/trusktr-ran-sysctl-p
+            fi
     fi
 
 

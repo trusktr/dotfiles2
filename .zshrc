@@ -434,7 +434,8 @@ ulimit -c unlimited
             # Requires ~/go/bin to be in PATH first.
             ps aux | grep '[c]roshclip -serve' 1>/dev/null
             result=$?
-            if ! $( exit $result ); then croshclip -serve > /tmp/croshclip.log 2>&1 &!; fi
+            # TODO disabled this because croshclip seems to be erroring out lately
+            #if ! $( exit $result ); then croshclip -serve > /tmp/croshclip.log 2>&1 &!; fi
 
         ### Disable right click (leave two-finger right click). More info: https://askubuntu.com/questions/602193/how-to-disable-right-click-on-the-touchpad/602439#602439
             synclient RightButtonAreaLeft=0

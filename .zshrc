@@ -389,7 +389,7 @@ ulimit -c unlimited
     #source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
     #source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
-### Go
+### Go programming language
     # TODO add Go setup to setup script.
     export GOPATH=~/go
     export PATH="$HOME/go/bin:$PATH"
@@ -464,6 +464,9 @@ ulimit -c unlimited
 
 ### Node versions managed with `n`, use this if `n` doesn't seem to switch your versions.
     #export PATH="/usr/local/n/versions/node/8.1.4/bin:$PATH"
+
+### Local NPM PATH
+    export PATH="$HOME/.npm-packages/bin:$PATH"
 
 ### Auto-generated
 # fzf fuzzy finder

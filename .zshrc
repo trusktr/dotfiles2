@@ -19,9 +19,9 @@ ulimit -c unlimited
     # OH-MY-ZSH BUNDLES
         antigen use oh-my-zsh # load oh-my-zsh
         #antigen bundle svn
-        antigen bundle git
+        # antigen bundle git
         antigen bundle git-extras
-        antigen bundle github
+        # antigen bundle github
         #antigen bundle coffee # Coffee.js completion
         #antigen bundle colored-man # colored man pages
         antigen bundle command-not-found # Guess what to install when running an unknown command

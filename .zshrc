@@ -3,6 +3,11 @@
     ##export NVIM_TUI_ENABLE_TRUE_COLOR=1
     #exec nvim +term
 #fi
+which croutonversion 2>/dev/null 1>/dev/null
+result=$?
+isChromeOS="false"; if $( exit $result ); then isChromeOS="true"; fi
+
+mapperAI=true
 
 # unlimited core dump size.
 ulimit -c unlimited
@@ -395,9 +400,6 @@ ulimit -c unlimited
     export PATH="$HOME/go/bin:$PATH"
 
 ### Chrome OS Crouton
-    which croutonversion 2>/dev/null 1>/dev/null
-    result=$?
-    isChromeOS="false"; if $( exit $result ); then isChromeOS="true"; fi
 
     if $isChromeOS; then
         # TODO add croshclip install to setup script.
@@ -467,6 +469,15 @@ ulimit -c unlimited
 
 ### Local NPM PATH
     export PATH="$HOME/.npm-packages/bin:$PATH"
+    
+### Mapper.ai
+
+    if $mapperAI; then
+        
+        # needed for Perception
+        alias nproc="sysctl -n hw.ncpu"
+        
+    fi
 
 ### Auto-generated
 # fzf fuzzy finder

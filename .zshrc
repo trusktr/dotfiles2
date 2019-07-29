@@ -482,3 +482,7 @@ ulimit -c unlimited
 ### Auto-generated
 # fzf fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /Users/trusktr/src/Signafy+mapper-annotator/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/trusktr/src/Signafy+mapper-annotator/node_modules/tabtab/.completions/electron-forge.zsh

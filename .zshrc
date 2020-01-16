@@ -469,14 +469,20 @@ ulimit -c unlimited
 
 ### Local NPM PATH
     export PATH="$HOME/.npm-packages/bin:$PATH"
-    
+
 ### Mapper.ai
 
     if $mapperAI; then
-        
+
         # needed for Perception
         alias nproc="sysctl -n hw.ncpu"
-        
+
+        # Mapper Cloud Services requirements (see
+        # https://jira.mapperai.net/confluence/display/MDSP/Onboarding+instructions)
+        # TODO this path may be different in Linux, Windows, or NixOS
+        export JAVA_HOME=$(/usr/libexec/java_home)
+        # export SDKMAN_DIR=~/.sdkman
+        # [[ -s ~/.sdkman/bin/sdkman-init.sh ]] && source ~/.sdkman/bin/sdkman-init.sh
     fi
 
 ### Auto-generated
@@ -486,3 +492,13 @@ ulimit -c unlimited
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /Users/trusktr/src/Signafy+mapper-annotator/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/trusktr/src/Signafy+mapper-annotator/node_modules/tabtab/.completions/electron-forge.zsh
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/trusktr/src/velodyne_sw+mapper-cloud-services/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/trusktr/src/velodyne_sw+mapper-cloud-services/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/trusktr/src/velodyne_sw+mapper-cloud-services/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/trusktr/src/velodyne_sw+mapper-cloud-services/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/trusktr/src/velodyne_sw+mapper-cloud-services/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/trusktr/src/velodyne_sw+mapper-cloud-services/node_modules/tabtab/.completions/slss.zsh

@@ -9,6 +9,11 @@ isChromeOS="false"; if $( exit $result ); then isChromeOS="true"; fi
 
 mapperAI=true
 
+# TODO get these variables from a common place
+which nixos-version 2>/dev/null 1>/dev/null
+result=$?
+isNixOS=false; if $( exit $result ); then isNixOS=true; fi
+
 # unlimited core dump size.
 ulimit -c unlimited
 
@@ -480,7 +485,9 @@ ulimit -c unlimited
         # Mapper Cloud Services requirements (see
         # https://jira.mapperai.net/confluence/display/MDSP/Onboarding+instructions)
         # TODO this path may be different in Linux, Windows, or NixOS
-        export JAVA_HOME=$(/usr/libexec/java_home)
+        if ! $isNixOS; then
+            export JAVA_HOME=$(/usr/libexec/java_home)
+        fi
         # export SDKMAN_DIR=~/.sdkman
         # [[ -s ~/.sdkman/bin/sdkman-init.sh ]] && source ~/.sdkman/bin/sdkman-init.sh
     fi

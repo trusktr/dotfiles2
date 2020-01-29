@@ -63,6 +63,11 @@ ulimit -c unlimited
 
         antigen bundle trusktr/longterm-beep
 
+        if $isNixOS; then
+            # tells nix-shell to open a zsh shell instead of a bash shell
+            antigen bundle chisui/zsh-nix-shell
+        fi
+
 
     # THEMES
         #antigen bundle Valodim/zsh-prompt-powerline
@@ -491,6 +496,11 @@ ulimit -c unlimited
         # export SDKMAN_DIR=~/.sdkman
         # [[ -s ~/.sdkman/bin/sdkman-init.sh ]] && source ~/.sdkman/bin/sdkman-init.sh
     fi
+
+# hook up direnv, so that it sources .envrc files when entering directories (if
+# explicitly allowed for that directory).
+# TODO make sure setup.sh installs it
+eval "$(direnv hook zsh)"
 
 ### Auto-generated
 # fzf fuzzy finder

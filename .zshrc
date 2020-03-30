@@ -287,6 +287,12 @@ ulimit -c unlimited
             # global node module location
             export NODE_PATH=$NODE_PATH:/usr/lib/node_modules:/usr/local/lib/node_modules
 
+            # This tells `n` (a version manager for Node.js) where to save
+            # versions of Node.js, and adds the currently-selected Node.js
+            # version to PATH.
+            export N_PREFIX=~/.n-node-versions
+            export PATH=~/.n-node-versions/bin:$PATH
+
         ## Default editor
         export EDITOR=nvim
         export VISUAL=nvim

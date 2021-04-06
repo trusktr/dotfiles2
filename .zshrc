@@ -7,7 +7,16 @@ which croutonversion 2>/dev/null 1>/dev/null
 result=$?
 isChromeOS="false"; if $( exit $result ); then isChromeOS="true"; fi
 
-mapperAI=true
+result=`uname`
+isMacOS=false; if [[ "$result" == 'Darwin' ]]; then isMacOS=true; fi
+isLinux=false; if [[ "$result" == 'Linux' ]]; then isLinux=true; fi
+
+mapperAI=false
+
+# TODO get these variables from a common place
+which nixos-version 2>/dev/null 1>/dev/null
+result=$?
+isNixOS=false; if $( exit $result ); then isNixOS=true; fi
 
 # unlimited core dump size.
 ulimit -c unlimited
@@ -57,6 +66,11 @@ ulimit -c unlimited
             }
 
         antigen bundle trusktr/longterm-beep
+
+        if $isNixOS; then
+            # tells nix-shell to open a zsh shell instead of a bash shell
+            antigen bundle chisui/zsh-nix-shell
+        fi
 
 
     # THEMES
@@ -267,6 +281,8 @@ ulimit -c unlimited
 
         # Homebrew
             export PATH=$PATH:/usr/local/bin
+            # macOS Homebrew recommended PATH setting. Need for Linux?
+            if isMacOS; then export PATH="/usr/local/sbin:$PATH"; fi
 
         # proper encoding for the linux terminal (ttys)
         if [ "$TERM" = linux ] ; then
@@ -276,6 +292,12 @@ ulimit -c unlimited
         # Node
             # global node module location
             export NODE_PATH=$NODE_PATH:/usr/lib/node_modules:/usr/local/lib/node_modules
+
+            # This tells `n` (a version manager for Node.js) where to save
+            # versions of Node.js, and adds the currently-selected Node.js
+            # version to PATH.
+            export N_PREFIX=~/.n-node-versions
+            export PATH=~/.n-node-versions/bin:$PATH
 
         ## Default editor
         export EDITOR=nvim
@@ -480,13 +502,17 @@ ulimit -c unlimited
         # Mapper Cloud Services requirements (see
         # https://jira.mapperai.net/confluence/display/MDSP/Onboarding+instructions)
         # TODO this path may be different in Linux, Windows, or NixOS
-        export JAVA_HOME=$(/usr/libexec/java_home)
+        if ! $isNixOS; then
+            export JAVA_HOME=$(/usr/libexec/java_home)
+        fi
         # export SDKMAN_DIR=~/.sdkman
         # [[ -s ~/.sdkman/bin/sdkman-init.sh ]] && source ~/.sdkman/bin/sdkman-init.sh
     fi
 
-# macOS Homebrew recommended PATH setting
-export PATH="/usr/local/sbin:$PATH"
+# hook up direnv, so that it sources .envrc files when entering directories (if
+# explicitly allowed for that directory).
+# TODO make sure setup.sh installs it
+eval "$(direnv hook zsh)"
 
 ### Auto-generated
 # fzf fuzzy finder

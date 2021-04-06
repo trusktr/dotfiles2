@@ -485,6 +485,9 @@ ulimit -c unlimited
         # [[ -s ~/.sdkman/bin/sdkman-init.sh ]] && source ~/.sdkman/bin/sdkman-init.sh
     fi
 
+# macOS Homebrew recommended PATH setting
+export PATH="/usr/local/sbin:$PATH"
+
 ### Auto-generated
 # fzf fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
